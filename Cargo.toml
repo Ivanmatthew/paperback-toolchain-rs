@@ -4,3 +4,36 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+#anyhow = "1.0.86"
+clap = "4.5.16"
+colored = "2.1.0"
+indicatif = "0.17.8"
+oxc = { version = "0.30.3", features=["codegen", "minifier", "serialize"] }
+sonic-rs = "0.3.11"
+
+#xshell = "0.2.6"
+#esbuild-rs = "0.13.8"
+#futures = "0.3.30"
+#async-std = "1.12.0"
+## rspack_core = { git = "https://github.com/web-infra-dev/rspack", tag = "v1.0.0-rc.1"}
+## mako = { git = "https://github.com/umijs/mako.git", tag = "v0.8.4" }
+#swc = "0.284.1"
+#swc_bundler = "0.236.0"
+#swc_common = { version = "0.37.4", features = ["tty-emitter"] }
+#swc_ecma_ast = "0.118.2"
+#swc_ecma_codegen = "0.155.0"
+#swc_ecma_loader = "0.49.1"
+#swc_ecma_parser = "0.149.0"
+
+[features]
+drop-in = []
+
+[[bin]]
+name = "paperback-cli"
+path = "src/main.rs"
+required-features = ["drop-in"]
+
+[[bin]]
+name = "pbtc"
+path = "src/main.rs"
+required-features = []
