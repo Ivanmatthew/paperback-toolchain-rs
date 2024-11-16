@@ -6,8 +6,9 @@ mod bundler_programs;
 // use bundler_programs::swc_bundler::bundler;
 // use bundler_programs::mako_bundler::bundler;
 // use bundler_programs::esbuildrs_bundler::bundler;
-use bundler_programs::esbuild_bundler::ESBuildBundler;
-use crate::bundler::bundler_programs::bundler;
+// use bundler_programs::esbuild_bundler::ESBuildBundler;
+use crate::bundler::bundler_programs::rolldown_bundler::RolldownBundler;
+use crate::bundler::bundler_programs::{bundler};
 
 pub struct Bundler;
 
@@ -16,7 +17,7 @@ impl Bundler {
         Self
     }
 
-    pub fn bundle(&self, extension_dir: &Path) -> bool {
+    pub async fn bundle(&self, extension_dir: &Path) -> bool {
         // TODO: Verifying correct extension
 
         let mut entry_points = HashMap::new();
@@ -41,7 +42,7 @@ impl Bundler {
         // TODO: Bundle extension
         // let bundler = SwcBundler::new();
         // swc_bundler.bundle(&entry_points);
-        let bundler = ESBuildBundler::new();
-        bundler.bundle(entry_points)
+        let mut bundler = RolldownBundler::new(entry_points);
+        bundler.bundle().await
     }
 }

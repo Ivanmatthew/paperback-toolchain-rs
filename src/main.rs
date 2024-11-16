@@ -60,7 +60,8 @@ fn ask(question: &str) -> String {
     input.trim().to_string()
 }
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let matches = cli().get_matches();
 
     match matches.subcommand() {
@@ -102,7 +103,7 @@ fn main() {
             println!("Bundling extension...");
             let bundler = bundler::Bundler::new();
             let start = time::Instant::now();
-            let bundled_successfully = bundler.bundle(&PathBuf::from(sub_matches.get_one::<String>("dir").unwrap()));
+            let bundled_successfully = bundler.bundle(&PathBuf::from(sub_matches.get_one::<String>("dir").unwrap())).await;
             if bundled_successfully {
                 println!("Bundled extension in {}ms", start.elapsed().as_millis());
                 println!("Extension bundled successfully.");
